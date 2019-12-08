@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.Controller">
+   <children>
+      <TextArea fx:id="outputArea" layoutX="14.0" layoutY="59.0" prefHeight="274.0" prefWidth="569.0" promptText="Сформированные составы" />
+      <TextField fx:id="passNum" layoutX="14.0" layoutY="14.0" promptText="Колво пассажиров" />
+      <TextField fx:id="cargoM" layoutX="185.0" layoutY="14.0" promptText="Масса груза(в тоннах)" />
+      <CheckBox fx:id="check" layoutX="351.0" layoutY="18.0" mnemonicParsing="false" text="Низкая температура" />
+      <Button layoutX="509.0" layoutY="354.0" mnemonicParsing="false" onAction="#saveFile" text="Сохранить" />
+      <Button layoutX="426.0" layoutY="354.0" mnemonicParsing="false" onAction="#loadFile" prefHeight="25.0" prefWidth="73.0" text="Загрузить" />
+   </children>
+</AnchorPane>
