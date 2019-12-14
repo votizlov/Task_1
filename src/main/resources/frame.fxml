@@ -11,7 +11,7 @@
       <TextArea fx:id="outputArea" layoutX="14.0" layoutY="59.0" prefHeight="274.0" prefWidth="569.0" promptText="Сформированные составы" />
       <TextField fx:id="passNum" layoutX="14.0" layoutY="14.0" promptText="Колво пассажиров" />
       <TextField fx:id="cargoM" layoutX="185.0" layoutY="14.0" promptText="Масса груза(в тоннах)" />
-      <CheckBox fx:id="check" layoutX="351.0" layoutY="18.0" mnemonicParsing="false" text="Низкая температура" />
+      <CheckBox fx:id="check" layoutX="351.0" layoutY="18.0" mnemonicParsing="false" text="Длинная дистанция" />
       <Button layoutX="97.0" layoutY="361.0" mnemonicParsing="false" onAction="#saveFile" text="Сохранить" />
       <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#loadFile" prefHeight="25.0" prefWidth="73.0" text="Загрузить" />
       <Button layoutX="485.0" layoutY="361.0" mnemonicParsing="false" onAction="#form" text="Сформировать" />

@@ -1,15 +1,18 @@
 package MainLogic;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Train {
-    private ArrayList<Carriage> carriages;
-    private ArrayList<Locomotive> locomotives;
+    private LinkedList<Carriage> carriages;
+    private LinkedList<Locomotive> locomotives;
     private TrainType type;
 
-    public Train(double cargoM) {
+    public Train(double cargoM, boolean longRange, boolean isElectrified) {
     }
 
     public Train(int passN, boolean harsh) {
+    }
+
+    public Train(double cargoM, boolean longRange) {
     }
 }
