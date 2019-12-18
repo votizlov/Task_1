@@ -1,5 +1,6 @@
 package UI;
 
+import FileLogic.Exceptions;
 import FileLogic.JSONReader;
 import FileLogic.JSONWriter;
 import MainLogic.Train;
@@ -11,7 +12,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
@@ -20,6 +20,7 @@ public class Controller {
     public TextArea outputArea;
     public TextField passNum;
     public CheckBox check;
+    public CheckBox check2;
     public TextField cargoM;
     private TrainFormer tf = new TrainFormer();
     private JSONReader reader = new JSONReader();
@@ -29,16 +30,23 @@ public class Controller {
 
     public void saveFile(ActionEvent event) {
         FileChooser fc = new FileChooser();
-        writer.writeTrains(fc.showSaveDialog(new Stage()).getAbsolutePath(),trains);
+        try {
+            writer.writeTrains(fc.showSaveDialog(new Stage()).getAbsolutePath(),trains);
+        } catch (Exceptions.WrongFileException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+        }
     }
 
     public void loadFile(ActionEvent event) {
         FileChooser fc = new FileChooser();
         try {
             reader.readTrains(fc.showOpenDialog(new Stage()).getAbsolutePath());
-        } catch (NullPointerException e){
+        } catch (Exceptions.WrongFileException e) {
+            e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("пизда");
+            alert.setContentText(e.getMessage());
         }
     }
 
@@ -46,6 +54,7 @@ public class Controller {
         trains= tf.formTrains(
                 Integer.parseInt(passNum.getText()),
                 Integer.parseInt(cargoM.getText()),
-                check.isSelected());
+                check.isSelected(),
+                check2.isSelected());
     }
 }
