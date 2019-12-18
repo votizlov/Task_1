@@ -3,7 +3,7 @@ package MainLogic.Carriages;
 public class EconomyClassCarrage extends TransportCarriage {
     private int maxHumans = 50;
 
-    int getMaxCargoAmount() {
+    public int getMaxCargoAmount() {
         return maxHumans;
     }
 }

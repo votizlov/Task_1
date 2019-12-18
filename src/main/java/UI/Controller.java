@@ -3,6 +3,7 @@ package UI;
 import FileLogic.Exceptions;
 import FileLogic.JSONReader;
 import FileLogic.JSONWriter;
+import MainLogic.Locomotive;
 import MainLogic.Train;
 import MainLogic.TrainFormer;
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Controller {
@@ -42,7 +44,7 @@ public class Controller {
     public void loadFile(ActionEvent event) {
         FileChooser fc = new FileChooser();
         try {
-            reader.readTrains(fc.showOpenDialog(new Stage()).getAbsolutePath());
+            trains = reader.readTrains(fc.showOpenDialog(new Stage()).getAbsolutePath());
         } catch (Exceptions.WrongFileException e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -51,10 +53,23 @@ public class Controller {
     }
 
     public void form(ActionEvent event) {
-        trains= tf.formTrains(
+        trains = tf.formTrains(
                 Integer.parseInt(passNum.getText()),
                 Integer.parseInt(cargoM.getText()),
                 check.isSelected(),
                 check2.isSelected());
+        outputArea.setText(trainsToString());
+    }
+
+    private String trainsToString(){
+        StringBuilder sb = new StringBuilder();
+        for (Train t:trains
+             ) {
+            for (Locomotive l:t.getLocomotives()
+                 ) {
+                sb.append("a ");
+            }
+        }
+        return sb.toString();
     }
 }
