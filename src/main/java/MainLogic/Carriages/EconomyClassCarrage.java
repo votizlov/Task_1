@@ -1,9 +1,14 @@
 package MainLogic.Carriages;
 
 public class EconomyClassCarrage extends TransportCarriage {
-    private int maxHumans = 50;
+    @Override
+    public String getString() {
+        return "-EconomyClassCarriage-";
+    }
 
-    public int getMaxCargoAmount() {
-        return maxHumans;
+    public EconomyClassCarrage(){
+        super();
+        setMaxCargoAmount(50);
+        setName("-EconomyClassCarriage-");
     }
 }

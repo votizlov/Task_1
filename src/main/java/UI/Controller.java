@@ -3,6 +3,7 @@ package UI;
 import FileLogic.Exceptions;
 import FileLogic.JSONReader;
 import FileLogic.JSONWriter;
+import MainLogic.Carriage;
 import MainLogic.Locomotive;
 import MainLogic.Train;
 import MainLogic.TrainFormer;
@@ -14,8 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Controller {
@@ -50,6 +49,7 @@ public class Controller {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText(e.getMessage());
         }
+        outputArea.setText(trainsToString());
     }
 
     public void form(ActionEvent event) {
@@ -67,8 +67,13 @@ public class Controller {
              ) {
             for (Locomotive l:t.getLocomotives()
                  ) {
-                sb.append("a ");
+                sb.append(l.getString());
             }
+            for (Carriage c:t.getCarriages()
+                 ) {
+                sb.append(c.getString());
+            }
+            sb.append("\n");
         }
         return sb.toString();
     }

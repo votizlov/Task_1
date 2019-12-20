@@ -1,4 +1,4 @@
 package MainLogic;
 
-public interface Carriage {
+public interface Carriage extends Drawable {
 }

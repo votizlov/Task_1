@@ -10,38 +10,41 @@ public class TrainFormer {
     public LinkedList<Train> formTrains(int passN,double cargoM,boolean longRange,boolean isElectrified){
         LinkedList<Train> trains = new LinkedList<Train>();
         LocoType usedType = isElectrified?LocoType.ELECTRIC:LocoType.DIESEL;
-        int locoPWR = 500;
+        int locoPWR = 100;
         Train tP = new Train(TrainType.PASSENGER);
         Train tC = new Train(TrainType.CARGO);
-        trains.add(tP);
-        trains.add(tC);
             while(passN!=0) {
                 if(tP.getAvailableCargo()==0) {
-                    trains.add(tP);
-                    for (int i = 0; i < MAX_L; i++) {
-                        tP.addLocomotive(new Locomotive(locoPWR,usedType));
+                    if (tP.getLocomotives().size()<3) {
+                            tP.addLocomotive(new Locomotive(locoPWR, usedType));
+                    } else {
+                        trains.add(tP);
+                        tP = new Train(TrainType.PASSENGER);
                     }
-                    tP = new Train(TrainType.PASSENGER);
                 }
                 EconomyClassCarrage c = new EconomyClassCarrage();
                 c.fill(Math.min(passN, c.getMaxCargoAmount()));
                 passN-=Math.min(passN, c.getMaxCargoAmount());
                 tP.addCarriage(c);
             }
+            if(!trains.contains(tP))
+                trains.addLast(tP);
             while(cargoM!=0) {
                 if(tC.getAvailableCargo()==0) {
-                    trains.add(tC);
-                    for (int i = 0; i < MAX_L; i++) {
-                        tC.addLocomotive(new Locomotive(locoPWR,usedType));
+                    if (tC.getLocomotives().size()<3) {
+                        tC.addLocomotive(new Locomotive(locoPWR, usedType));
+                    } else {
+                        trains.add(tC);
+                        tC = new Train(TrainType.CARGO);
                     }
-                    tC = new Train(TrainType.CARGO);
                 }
                 SimpleCargoCarriage c = new SimpleCargoCarriage();
                 c.fill((int) Math.min(cargoM, c.getMaxCargoAmount()));
                 cargoM-=Math.min(cargoM, c.getMaxCargoAmount());
                 tC.addCarriage(c);
             }
-
+        if(!trains.contains(tC))
+            trains.addLast(tC);
 
         return trains;
     }
